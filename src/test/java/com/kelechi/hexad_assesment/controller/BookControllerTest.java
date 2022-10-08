@@ -51,7 +51,7 @@ public class BookControllerTest {
 
         mockMvc.perform(MockMvcRequestBuilders.get("/")
                         .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("$", hasSize(2))).andDo(print());
+                .andExpect(jsonPath("$", hasSize(0))).andDo(print());
     }
 
 
