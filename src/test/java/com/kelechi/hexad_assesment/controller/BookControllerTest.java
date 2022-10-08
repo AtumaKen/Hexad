@@ -1,4 +1,4 @@
-package com.kelechi.hexad_assesment;
+package com.kelechi.hexad_assesment.controller;
 
 import com.kelechi.hexad_assesment.models.Book;
 import com.kelechi.hexad_assesment.services.BookService;
