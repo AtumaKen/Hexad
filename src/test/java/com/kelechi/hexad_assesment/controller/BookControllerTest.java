@@ -39,4 +39,9 @@ public class BookControllerTest {
                 .contentType(MediaType.APPLICATION_JSON)
         ).andExpect(jsonPath("$", hasSize(2))).andDo(print());
     }
+
+    @Test
+    void returnEmptyListWhenLibraryIsEmptyController() throws Exception {
+
+    }
 }
