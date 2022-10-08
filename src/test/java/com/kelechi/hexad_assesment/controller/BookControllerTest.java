@@ -27,21 +27,32 @@ public class BookControllerTest {
     @MockBean
     private BookService bookService;
 
-    @Test
-    void getAllBooks() throws Exception {
+    private List<Book> getBooks() {
         List<Book> books = new ArrayList<>();
         books.add(new Book(1L, "Harry Potter", "JK Rowlings"));
         books.add(new Book(2L, "Animal Farm", "George Owel"));
+        return books;
+    }
 
+    @Test
+    void getAllBooks() throws Exception {
+        List<Book> books = getBooks();
         when(bookService.findAll()).thenReturn(books);
-
         mockMvc.perform(MockMvcRequestBuilders.get("/")
                 .contentType(MediaType.APPLICATION_JSON)
         ).andExpect(jsonPath("$", hasSize(2))).andDo(print());
     }
 
-    @Test
-    void returnEmptyListWhenLibraryIsEmptyController() throws Exception {
 
+
+    @Test
+    void returnEmptyListWhenLibraryIsEmpty() throws Exception {
+        when(bookService.findAll()).thenReturn(new ArrayList<>());
+
+        mockMvc.perform(MockMvcRequestBuilders.get("/")
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$", hasSize(2))).andDo(print());
     }
+
+
 }
