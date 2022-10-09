@@ -25,6 +25,6 @@ public class BookController {
     @PostMapping
     @ResponseStatus(HttpStatus.OK)
     public Book returnBorrowedBook(@RequestBody Book book){
-        return null;
+        return service.returnBook(book);
     }
 }

@@ -71,7 +71,7 @@ public class BookControllerTest {
 
         mockMvc.perform(MockMvcRequestBuilders.post("/books").content(mapper.writeValueAsString(book))
                         .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("$.id", is(book.getId()))).andDo(print()).andExpect(status().isOk());
+                .andDo(print()).andExpect(status().isOk());
     }
 
 
