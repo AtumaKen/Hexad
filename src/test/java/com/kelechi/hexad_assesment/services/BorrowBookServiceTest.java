@@ -62,7 +62,11 @@ class BorrowBookServiceTest {
 
     @Test
     void userCanOnlyHaveOneCopyOfABook(){
-
+        bookService.getAll().clear();
+        bookService.addBook(new Book(28L, "Harry Potter", "JK Rowlings", 2));
+        List<Book> allBooks = bookService.getAll();
+        service.borrow(1L);
+        assertEquals(1, bookService.findById(1L).getAvailableCopies());
     }
 
 }
