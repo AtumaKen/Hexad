@@ -38,4 +38,15 @@ class BorrowBookServiceTest {
         assertFalse(available.stream().anyMatch(availableBook -> bookService.compareBooks(availableBook, borrowedBook)));
     }
 
+    @Test
+    void borrowedGoesIntoTheBorrowedList(){
+        Book book1 = new Book(1L, "Harry Potter", "JK Rowlings");
+        Book book2  = new Book(2L, "Animal Farm", "George Owel");
+
+        List<Book> books = new ArrayList<>(List.of(book1, book2));
+        Book borrowedBook = books.get(0);
+        service.borrow(borrowedBook.getId());
+        assertTrue(service.getBorrowedBooks().stream().anyMatch(borrowed -> bookService.compareBooks(borrowed, borrowedBook)));
+    }
+
 }
