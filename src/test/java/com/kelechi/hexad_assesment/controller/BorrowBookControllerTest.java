@@ -2,6 +2,7 @@ package com.kelechi.hexad_assesment.controller;
 
 
 import com.kelechi.hexad_assesment.models.Book;
+import com.kelechi.hexad_assesment.services.BookService;
 import com.kelechi.hexad_assesment.services.BorrowBookService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +23,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 
 
-@ContextConfiguration(classes = {BorrowBookControllerTest.class, BorrowBookService.class})
+//@ContextConfiguration(classes = {BorrowBookControllerTest.class, BorrowBookService.class})
 @WebMvcTest
 public class BorrowBookControllerTest {
 
@@ -31,6 +32,9 @@ public class BorrowBookControllerTest {
 
     @MockBean
     private BorrowBookService borrowBookService;
+
+    @MockBean
+    private BookService bookService;
 
 
     @Test

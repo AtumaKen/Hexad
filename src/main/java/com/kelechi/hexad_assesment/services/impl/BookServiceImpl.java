@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
-@Service("bookService")
+@Service
 public class BookServiceImpl implements BookService {
 
     private final List<Book> books = new ArrayList<>();

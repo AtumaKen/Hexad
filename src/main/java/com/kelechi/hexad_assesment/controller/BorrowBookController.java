@@ -4,6 +4,7 @@ import com.kelechi.hexad_assesment.models.Book;
 import com.kelechi.hexad_assesment.services.BorrowBookService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,11 +15,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/borrow")
+@RequiredArgsConstructor
 public class BorrowBookController {
 
-    @Lazy
-    @Autowired
-    private  BorrowBookService service;
+    private final BorrowBookService service;
 
     @GetMapping("{id}")
     public List<Book> borrowBook(@PathVariable Long id){

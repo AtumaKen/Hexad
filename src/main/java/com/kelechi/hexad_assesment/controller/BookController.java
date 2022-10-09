@@ -4,6 +4,7 @@ import com.kelechi.hexad_assesment.models.Book;
 import com.kelechi.hexad_assesment.services.BookService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,11 +15,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("book")
+@RequestMapping("books")
+@RequiredArgsConstructor
 public class BookController {
 
-    @Autowired
-    private BookService service;
+
+    private final BookService service;
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
