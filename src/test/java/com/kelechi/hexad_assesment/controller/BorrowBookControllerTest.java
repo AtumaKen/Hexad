@@ -50,7 +50,7 @@ public class BorrowBookControllerTest {
 
         mockMvc.perform(MockMvcRequestBuilders.get("/borrow/1")
                 .contentType(MediaType.APPLICATION_JSON)
-        ).andExpect(jsonPath("$", hasSize(2))).andDo(print());
+        ).andExpect(jsonPath("$", hasSize(1))).andDo(print());
 
     }
 }
