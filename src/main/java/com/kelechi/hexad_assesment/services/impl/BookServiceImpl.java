@@ -25,7 +25,9 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public boolean compareBooks(Book book1, Book book2) {
-        return book1.getAuthor().equals(book2.getAuthor()) && book1.getTitle().equals(book2.getTitle());
+        return book1.getAuthor().equals(book2.getAuthor())
+                && book1.getTitle().equals(book2.getTitle())
+                && book1.getId().equals(book2.getId());
     }
 
 
@@ -39,6 +41,18 @@ public class BookServiceImpl implements BookService {
     @Override
     public void removeBook(Book book) {
         books.remove(book);
+    }
+
+    @Override
+    public Book borrowBook(Book book) {
+        Book toBeBorrowed = findById(book.getId());
+        if(toBeBorrowed.getAvailableCopies() > 0) {
+            toBeBorrowed.setAvailableCopies(toBeBorrowed.getAvailableCopies() - 1);
+
+            return toBeBorrowed;
+        }
+        removeBook(toBeBorrowed);
+        return toBeBorrowed;
     }
 
 

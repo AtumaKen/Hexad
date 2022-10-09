@@ -20,12 +20,15 @@ public class BorrowBookServiceImpl implements BorrowBookService {
 
     @Override
     public List<Book> borrow(Long id) {
-        System.out.println("borrowed list " + borrowedBooks.size());
         if(borrowedBooks.size() > 1 )
             throw new ProcessingException("Borrow Limit exceeded");
         Book bookToBeBorrowed = bookService.findById(id);
-        bookService.removeBook(bookToBeBorrowed);
-        borrowedBooks.add(bookToBeBorrowed);
+
+        Book book = bookService.borrowBook(bookToBeBorrowed);
+        if(borrowedBooks.stream().anyMatch(book1 -> bookService.compareBooks(book1, book)))
+            throw new ProcessingException("You can only have one copy of this book");
+
+        borrowedBooks.add(book);
         return bookService.getAll();
     }
 

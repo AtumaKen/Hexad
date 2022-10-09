@@ -3,7 +3,6 @@ package com.kelechi.hexad_assesment.services;
 import com.kelechi.hexad_assesment.HeadAssessmentApplication;
 import com.kelechi.hexad_assesment.exceptions.ProcessingException;
 import com.kelechi.hexad_assesment.models.Book;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -17,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class BorrowBookServiceTest {
 
     @Autowired
-    private BorrowBookService service;
+    private BorrowBookService borrowBookService;
 
     @Autowired
     private BookService bookService;
@@ -26,7 +25,7 @@ class BorrowBookServiceTest {
     void libraryIsNotEmptyBeforeBorrowing(){
 
         bookService.getAll().clear();
-        assertThrows(ProcessingException.class, ()-> service.borrow(1L));
+        assertThrows(ProcessingException.class, ()-> borrowBookService.borrow(1L));
 
     }
 
@@ -37,7 +36,7 @@ class BorrowBookServiceTest {
 
         List<Book> books = new ArrayList<>(List.of(book1, book2));
         Book borrowedBook = books.get(0);
-        List<Book> available = service.borrow(borrowedBook.getId());
+        List<Book> available = borrowBookService.borrow(borrowedBook.getId());
         assertFalse(available.stream().anyMatch(availableBook -> bookService.compareBooks(availableBook, borrowedBook)));
     }
 
@@ -45,8 +44,8 @@ class BorrowBookServiceTest {
     void borrowedGoesIntoTheBorrowedList(){
         List<Book> all = bookService.getAll();
         Book borrowedBook = all.get(0);
-        service.borrow(borrowedBook.getId());
-        assertTrue(service.getBorrowedBooks().stream().anyMatch(borrowed -> bookService.compareBooks(borrowed, borrowedBook)));
+        borrowBookService.borrow(borrowedBook.getId());
+        assertTrue(borrowBookService.getBorrowedBooks().stream().anyMatch(borrowed -> bookService.compareBooks(borrowed, borrowedBook)));
     }
 
     @Test
@@ -55,9 +54,9 @@ class BorrowBookServiceTest {
         Book book2  = new Book(98L, "Animal Farm", "George Owel", 1);
         bookService.addBook(book1);
         bookService.addBook(book2);
-        service.borrow(98L);
-        service.borrow(28L);
-        assertThrows( ProcessingException.class, () -> service.borrow(1L), "User has a borrowing limit of 2");
+        borrowBookService.borrow(98L);
+        borrowBookService.borrow(28L);
+        assertThrows( ProcessingException.class, () -> borrowBookService.borrow(1L), "User has a borrowing limit of 2");
     }
 
     @Test
@@ -65,8 +64,11 @@ class BorrowBookServiceTest {
         bookService.getAll().clear();
         bookService.addBook(new Book(28L, "Harry Potter", "JK Rowlings", 2));
         List<Book> allBooks = bookService.getAll();
-        service.borrow(1L);
-        assertEquals(1, bookService.findById(1L).getAvailableCopies());
+        borrowBookService.borrow(28L);
+        assertEquals(1, bookService.findById(28L).getAvailableCopies());
     }
+
+    //cannot have negative copy of books
+    //book should be removed if out of copies
 
 }
