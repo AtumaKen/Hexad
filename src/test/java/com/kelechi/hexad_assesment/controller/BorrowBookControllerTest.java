@@ -61,12 +61,10 @@ public class BorrowBookControllerTest {
 
         List<Book> books = new ArrayList<>(List.of(book1, book2));
 
-
-        books.remove(book1);
-        when(borrowBookService.borrow(1L)).thenReturn(books);
+        when(borrowBookService.getBorrowedBooks()).thenReturn(books);
 
         mockMvc.perform(MockMvcRequestBuilders.get("/borrow")
                 .contentType(MediaType.APPLICATION_JSON)
-        ).andExpect(jsonPath("$", hasSize(1))).andDo(print());
+        ).andExpect(jsonPath("$", hasSize(2))).andDo(print());
     }
 }

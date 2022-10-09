@@ -27,6 +27,6 @@ public class BorrowBookController {
 
     @GetMapping
     public List<Book> getBorrowedBooks(){
-        return null;
+        return service.getBorrowedBooks();
     }
 }
