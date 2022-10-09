@@ -25,6 +25,8 @@ class BorrowBookServiceTest {
     @Test
     void libraryIsNotEmptyBeforeBorrowing(){
 
+        bookService.getAll();
+        assertThrows(ProcessingException.class, ()-> service.borrow(1L));
 
     }
 
@@ -56,6 +58,11 @@ class BorrowBookServiceTest {
         service.borrow(98L);
         service.borrow(28L);
         assertThrows( ProcessingException.class, () -> service.borrow(1L), "User has a borrowing limit of 2");
+    }
+
+    @Test
+    void userCanOnlyHaveOneCopyOfABook(){
+
     }
 
 }
