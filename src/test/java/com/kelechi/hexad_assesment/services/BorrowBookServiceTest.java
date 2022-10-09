@@ -25,7 +25,7 @@ class BorrowBookServiceTest {
     @Test
     void libraryIsNotEmptyBeforeBorrowing(){
 
-        bookService.getAll();
+        bookService.getAll().clear();
         assertThrows(ProcessingException.class, ()-> service.borrow(1L));
 
     }
