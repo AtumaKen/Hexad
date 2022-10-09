@@ -24,4 +24,9 @@ public class BorrowBookController {
     public List<Book> borrowBook(@PathVariable Long id){
        return service.borrow(id);
     }
+
+    @GetMapping
+    public List<Book> getBorrowedBooks(){
+        return null;
+    }
 }
