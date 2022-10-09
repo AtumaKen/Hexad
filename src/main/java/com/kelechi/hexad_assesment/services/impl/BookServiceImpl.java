@@ -13,7 +13,7 @@ public class BookServiceImpl implements BookService {
     private final List<Book> books = new ArrayList<>();
 
     @Override
-    public List<Book> findAll() {
+    public List<Book> getAll() {
         return books;
     }
 
