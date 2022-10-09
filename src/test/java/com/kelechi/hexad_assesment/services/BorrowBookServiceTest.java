@@ -85,7 +85,12 @@ class BorrowBookServiceTest {
 
     @Test
     void cannotHaveNegativeNumberAsAvailableCopy(){
+        Book book = new Book();
+        book.setId(2L);
+        book.setAuthor("Mario Puzo");
+        book.setTitle("Title");
 
+        assertThrows(ProcessingException.class, ()-> book.setAvailableCopies(-1));
     }
 
 }
