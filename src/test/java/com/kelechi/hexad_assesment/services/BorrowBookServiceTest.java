@@ -3,6 +3,7 @@ package com.kelechi.hexad_assesment.services;
 import com.kelechi.hexad_assesment.HeadAssessmentApplication;
 import com.kelechi.hexad_assesment.exceptions.ProcessingException;
 import com.kelechi.hexad_assesment.models.Book;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -21,18 +22,21 @@ class BorrowBookServiceTest {
     @Autowired
     private BookService bookService;
 
+    @BeforeEach
+    public void setUp() {
+        bookService.getAll().clear();
+        borrowBookService.getBorrowedBooks().clear();
+    }
+
     @Test
     void libraryIsNotEmptyBeforeBorrowing(){
 
-        bookService.getAll().clear();
         assertThrows(ProcessingException.class, ()-> borrowBookService.borrow(1L));
 
     }
 
     @Test
     void bookIsRemovedFromLibraryWhenLastCopyIsBorrowed(){
-        bookService.getAll().clear();
-        borrowBookService.getBorrowedBooks().clear();
         Book book1 = new Book(1L, "Harry Potter", "JK Rowlings", 1);
         Book book2  = new Book(2L, "Animal Farm", "George Owel", 1);
 
@@ -46,6 +50,8 @@ class BorrowBookServiceTest {
 
     @Test
     void borrowedGoesIntoTheBorrowedList(){
+        Book book1 = new Book(28L, "Harry Potter", "JK Rowlings", 1);
+        bookService.addBook(book1);
         List<Book> all = bookService.getAll();
         Book borrowedBook = all.get(0);
         borrowBookService.borrow(borrowedBook.getId());
@@ -54,8 +60,6 @@ class BorrowBookServiceTest {
 
     @Test
     void userHasABorrowingLimitOfTwoBooks (){
-        bookService.getAll().clear();
-        borrowBookService.getBorrowedBooks().clear();
 
         Book book1 = new Book(28L, "Harry Potter", "JK Rowlings", 1);
         Book book2  = new Book(98L, "Animal Farm", "George Owel", 1);
@@ -71,7 +75,6 @@ class BorrowBookServiceTest {
 
     @Test
     void userCanOnlyHaveOneCopyOfABook(){
-        bookService.getAll().clear();
         bookService.addBook(new Book(28L, "Harry Potter", "JK Rowlings", 2));
         List<Book> allBooks = bookService.getAll();
         borrowBookService.borrow(28L);
