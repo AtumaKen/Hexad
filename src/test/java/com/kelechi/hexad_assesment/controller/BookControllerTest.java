@@ -34,8 +34,8 @@ public class BookControllerTest {
 
     private List<Book> getBooks() {
         List<Book> books = new ArrayList<>();
-        books.add(new Book(1L, "Harry Potter", "JK Rowlings"));
-        books.add(new Book(2L, "Animal Farm", "George Owel"));
+        books.add(new Book(1L, "Harry Potter", "JK Rowlings", 1));
+        books.add(new Book(2L, "Animal Farm", "George Owel", 1));
         return books;
     }
 

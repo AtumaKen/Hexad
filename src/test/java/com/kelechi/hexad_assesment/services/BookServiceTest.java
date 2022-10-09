@@ -21,8 +21,8 @@ public class BookServiceTest {
     @Test
     void findAllBooks(){
 
-        Book book1 = new Book(1L, "Harry Potter", "JK Rowlings");
-        Book book2  = new Book(2L, "Animal Farm", "George Owel");
+        Book book1 = new Book(1L, "Harry Potter", "JK Rowlings", 1);
+        Book book2  = new Book(2L, "Animal Farm", "George Owel", 1);
 
 
         service.addBook(book1);
@@ -37,7 +37,7 @@ public class BookServiceTest {
 
     @Test
     void libraryIsNotEmptyAfterAddingBook(){
-        Book book1 = new Book(1L, "Harry Potter", "JK Rowlings");
+        Book book1 = new Book(1L, "Harry Potter", "JK Rowlings", 1);
         service.addBook(book1);
         assertFalse(service.getAll().isEmpty());
     }
