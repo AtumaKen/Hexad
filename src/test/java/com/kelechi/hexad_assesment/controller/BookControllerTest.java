@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.hamcrest.Matchers.hasSize;
+import static org.hamcrest.Matchers.is;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -70,7 +71,7 @@ public class BookControllerTest {
 
         mockMvc.perform(MockMvcRequestBuilders.post("/books").content(mapper.writeValueAsString(book))
                         .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("$", hasSize(0))).andDo(print()).andExpect(status().isOk());
+                .andExpect(jsonPath("$.id", is(book.getId()))).andDo(print()).andExpect(status().isOk());
     }
 
 
