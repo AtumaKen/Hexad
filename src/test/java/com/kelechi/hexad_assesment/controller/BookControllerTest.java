@@ -68,7 +68,7 @@ public class BookControllerTest {
         Book book = new Book(1L, "Harry Potter", "JK Rowlings", 1);
         when(bookService.returnBook(book)).thenReturn(book);
 
-        mockMvc.perform(MockMvcRequestBuilders.post("/books/return").content(mapper.writeValueAsString(book))
+        mockMvc.perform(MockMvcRequestBuilders.post("/books").content(mapper.writeValueAsString(book))
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$", hasSize(0))).andDo(print()).andExpect(status().isOk());
     }
