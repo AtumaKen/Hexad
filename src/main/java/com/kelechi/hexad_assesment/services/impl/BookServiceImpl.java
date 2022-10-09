@@ -58,7 +58,7 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public Book returnBook(long l) {
+    public Book returnBook(Book book) {
         return null;
     }
 

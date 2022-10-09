@@ -18,5 +18,5 @@ public interface BookService {
 
     Book borrowBook(Book book);
 
-    Book returnBook(long l);
+    Book returnBook(Book book);
 }

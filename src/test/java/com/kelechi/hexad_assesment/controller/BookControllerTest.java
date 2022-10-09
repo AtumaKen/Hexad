@@ -1,5 +1,6 @@
 package com.kelechi.hexad_assesment.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kelechi.hexad_assesment.models.Book;
 import com.kelechi.hexad_assesment.services.BookService;
 import com.kelechi.hexad_assesment.services.BorrowBookService;
@@ -18,6 +19,7 @@ import static org.hamcrest.Matchers.hasSize;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest
 //@ContextConfiguration(classes = {BookControllerTest.class, BookService.class})
@@ -28,6 +30,9 @@ public class BookControllerTest {
 
     @MockBean
     private BookService bookService;
+
+    @Autowired
+    private ObjectMapper mapper;
 
     @MockBean
     private BorrowBookService borrowBookService;
@@ -49,7 +54,6 @@ public class BookControllerTest {
     }
 
 
-
     @Test
     void returnEmptyListWhenLibraryIsEmpty() throws Exception {
         when(bookService.getAll()).thenReturn(new ArrayList<>());
@@ -60,9 +64,13 @@ public class BookControllerTest {
     }
 
     @Test
-    void returnBorrowedBookToLibrary(){
+    void returnBorrowedBookToLibrary() throws Exception {
         Book book = new Book(1L, "Harry Potter", "JK Rowlings", 1);
-        when(bookService.returnBook(1L)).thenReturn(book);
+        when(bookService.returnBook(book)).thenReturn(book);
+
+        mockMvc.perform(MockMvcRequestBuilders.post("/books/return").content(mapper.writeValueAsString(book))
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$", hasSize(0))).andDo(print()).andExpect(status().isOk());
     }
 
 
