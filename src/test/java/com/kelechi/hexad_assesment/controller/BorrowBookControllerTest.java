@@ -53,4 +53,20 @@ public class BorrowBookControllerTest {
         ).andExpect(jsonPath("$", hasSize(1))).andDo(print());
 
     }
+
+    @Test
+    void viewListOfBorrowedBooks() throws Exception {
+        Book book1 = new Book(1L, "Harry Potter", "JK Rowlings", 1);
+        Book book2  = new Book(2L, "Animal Farm", "George Owel", 1);
+
+        List<Book> books = new ArrayList<>(List.of(book1, book2));
+
+
+        books.remove(book1);
+        when(borrowBookService.borrow(1L)).thenReturn(books);
+
+        mockMvc.perform(MockMvcRequestBuilders.get("/borrow")
+                .contentType(MediaType.APPLICATION_JSON)
+        ).andExpect(jsonPath("$", hasSize(1))).andDo(print());
+    }
 }
