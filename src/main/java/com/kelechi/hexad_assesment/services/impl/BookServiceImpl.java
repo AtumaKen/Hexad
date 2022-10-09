@@ -38,6 +38,7 @@ public class BookServiceImpl implements BookService {
                 .orElseThrow( () ->new ProcessingException("Book not found"));
     }
 
+    //todo: refactor
     @Override
     public void removeBook(Book book) {
         books.remove(book);
@@ -54,6 +55,11 @@ public class BookServiceImpl implements BookService {
         }
         removeBook(toBeBorrowed);
         return toBeBorrowed;
+    }
+
+    @Override
+    public Book returnBook(long l) {
+        return null;
     }
 
 

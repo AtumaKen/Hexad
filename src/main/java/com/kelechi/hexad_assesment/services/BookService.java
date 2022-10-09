@@ -17,4 +17,6 @@ public interface BookService {
     void removeBook(Book id);
 
     Book borrowBook(Book book);
+
+    Book returnBook(long l);
 }

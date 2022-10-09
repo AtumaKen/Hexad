@@ -63,7 +63,7 @@ public class BorrowBookControllerTest {
 
         when(borrowBookService.getBorrowedBooks()).thenReturn(books);
 
-        mockMvc.perform(MockMvcRequestBuilders.get("/borrow")
+        mockMvc.perform(MockMvcRequestBuilders.post("/borrow").content("1")
                 .contentType(MediaType.APPLICATION_JSON)
         ).andExpect(jsonPath("$", hasSize(2))).andDo(print());
     }
