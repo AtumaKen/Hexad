@@ -82,6 +82,10 @@ class BorrowBookServiceTest {
     }
 
     //cannot have negative copy of books
-    //book should be removed if out of copies
+
+    @Test
+    void cannotHaveNegativeNumberAsAvailableCopy(){
+
+    }
 
 }
