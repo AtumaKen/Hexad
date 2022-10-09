@@ -59,5 +59,11 @@ public class BookControllerTest {
                 .andExpect(jsonPath("$", hasSize(0))).andDo(print());
     }
 
+    @Test
+    void returnBorrowedBookToLibrary(){
+        Book book = new Book(1L, "Harry Potter", "JK Rowlings", 1);
+        when(bookService.returnBook(1L)).thenReturn(book);
+    }
+
 
 }
