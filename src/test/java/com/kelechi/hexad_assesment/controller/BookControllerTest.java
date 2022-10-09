@@ -25,7 +25,7 @@ public class BookControllerTest {
     private MockMvc mockMvc;
 
     @MockBean
-    private BookService bookService;
+    private BookService bookServiceTest;
 
     private List<Book> getBooks() {
         List<Book> books = new ArrayList<>();
@@ -37,7 +37,7 @@ public class BookControllerTest {
     @Test
     void getAllBooks() throws Exception {
         List<Book> books = getBooks();
-        when(bookService.findAll()).thenReturn(books);
+        when(bookServiceTest.findAll()).thenReturn(books);
         mockMvc.perform(MockMvcRequestBuilders.get("/")
                 .contentType(MediaType.APPLICATION_JSON)
         ).andExpect(jsonPath("$", hasSize(2))).andDo(print());
@@ -47,7 +47,7 @@ public class BookControllerTest {
 
     @Test
     void returnEmptyListWhenLibraryIsEmpty() throws Exception {
-        when(bookService.findAll()).thenReturn(new ArrayList<>());
+        when(bookServiceTest.findAll()).thenReturn(new ArrayList<>());
 
         mockMvc.perform(MockMvcRequestBuilders.get("/")
                         .contentType(MediaType.APPLICATION_JSON))
