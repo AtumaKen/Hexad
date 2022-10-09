@@ -46,4 +46,9 @@ class BorrowBookServiceTest {
         assertTrue(service.getBorrowedBooks().stream().anyMatch(borrowed -> bookService.compareBooks(borrowed, borrowedBook)));
     }
 
+    @Test
+    void userHasABorrowingLimitOfTwoBooks{
+
+    }
+
 }
