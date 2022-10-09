@@ -7,6 +7,8 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 public class BookServiceTest {
 
     @Test
@@ -16,9 +18,14 @@ public class BookServiceTest {
         Book book2  = new Book(2L, "Animal Farm", "George Owel");
 
         BookService service = new BookServiceImpl();
-        service.add(book1);
-        service.add(book2);
-        List<Book> all = service.findAll();
+        service.addBook(book1);
+        service.addBook(book2);
+        List<Book> allBooks = service.findAll();
+
+        Book lastBook = allBooks.get(allBooks.size() -2);
+        assertEquals(book2.getId(), lastBook.getId());
+        assertEquals(book2.getTitle(), lastBook.getTitle());
+        assertEquals(book2.getAuthor(), lastBook.getAuthor());
     }
 
 

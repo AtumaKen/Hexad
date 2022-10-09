@@ -13,6 +13,13 @@ public class HeadAssessmentApplication {
 		SpringApplication.run(HeadAssessmentApplication.class, args);
 	}
 
-
+	@Bean
+	public CommandLineRunner setup(BookService bookService) {
+		return (args) -> {
+			bookService.addBook(new Book(1L, "Fools Die", "Mario Puzo"));
+			bookService.addBook(new Book(2L, "Rich dad poor dad", "Robert Kiyosaki"));
+			bookService.addBook(new Book(3L, "Gifted Hands", "Ben Carson"));
+		};
+	}
 
 }

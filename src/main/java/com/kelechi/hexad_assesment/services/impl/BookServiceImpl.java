@@ -10,8 +10,17 @@ import java.util.List;
 @Service
 public class BookServiceImpl implements BookService {
 
+    private List<Book> books = new ArrayList<>();
+
     @Override
     public List<Book> findAll() {
-        return new ArrayList<>();
+        return books;
     }
+
+    @Override
+    public void addBook(Book book) {
+        books.add(book);
+    }
+
+
 }
