@@ -4,6 +4,6 @@ import com.kelechi.hexad_assesment.models.Book;
 
 import java.util.List;
 
-public interface BorrowService {
-    List<Book> borrow(Long i);
+public interface BorrowBookService {
+    List<Book> borrow(Long id);
 }

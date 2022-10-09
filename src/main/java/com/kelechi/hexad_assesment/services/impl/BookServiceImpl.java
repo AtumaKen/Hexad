@@ -7,10 +7,10 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
-@Service
+@Service("bookService")
 public class BookServiceImpl implements BookService {
 
-    private List<Book> books = new ArrayList<>();
+    private final List<Book> books = new ArrayList<>();
 
     @Override
     public List<Book> findAll() {

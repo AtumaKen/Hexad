@@ -1,28 +1,27 @@
 package com.kelechi.hexad_assesment.controller;
 
 import com.kelechi.hexad_assesment.models.Book;
-import com.kelechi.hexad_assesment.services.BookService;
+import com.kelechi.hexad_assesment.services.BorrowBookService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("book")
-public class BookController {
+@RequestMapping("/borrow")
+public class BorrowBookController {
 
+    @Lazy
     @Autowired
-    private BookService service;
+    private  BorrowBookService service;
 
-    @GetMapping
-    @ResponseStatus(HttpStatus.OK)
-    public List<Book> findAll(){
-        return service.findAll();
+    @GetMapping("{id}")
+    public List<Book> borrowBook(@PathVariable Long id){
+       return service.borrow(id);
     }
 }

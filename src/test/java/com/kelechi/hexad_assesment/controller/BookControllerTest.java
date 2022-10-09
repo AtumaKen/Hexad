@@ -2,11 +2,13 @@ package com.kelechi.hexad_assesment.controller;
 
 import com.kelechi.hexad_assesment.models.Book;
 import com.kelechi.hexad_assesment.services.BookService;
+import com.kelechi.hexad_assesment.services.BorrowBookService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
@@ -19,6 +21,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 
 @WebMvcTest
+//@ContextConfiguration(classes = {BookControllerTest.class, BookService.class})
 public class BookControllerTest {
 
     @Autowired
@@ -38,7 +41,7 @@ public class BookControllerTest {
     void getAllBooks() throws Exception {
         List<Book> books = getBooks();
         when(bookServiceTest.findAll()).thenReturn(books);
-        mockMvc.perform(MockMvcRequestBuilders.get("/")
+        mockMvc.perform(MockMvcRequestBuilders.get("/book")
                 .contentType(MediaType.APPLICATION_JSON)
         ).andExpect(jsonPath("$", hasSize(2))).andDo(print());
     }
@@ -49,7 +52,7 @@ public class BookControllerTest {
     void returnEmptyListWhenLibraryIsEmpty() throws Exception {
         when(bookServiceTest.findAll()).thenReturn(new ArrayList<>());
 
-        mockMvc.perform(MockMvcRequestBuilders.get("/")
+        mockMvc.perform(MockMvcRequestBuilders.get("/book")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$", hasSize(0))).andDo(print());
     }
