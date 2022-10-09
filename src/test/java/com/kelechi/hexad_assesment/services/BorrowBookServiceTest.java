@@ -30,7 +30,7 @@ class BorrowBookServiceTest {
     }
 
     @Test
-    void bookLeavesTheLibraryWhenLastCopyIsBorrowed(){
+    void bookIsRemovedFromLibraryWhenLastCopyIsBorrowed(){
         bookService.getAll().clear();
         borrowBookService.getBorrowedBooks().clear();
         Book book1 = new Book(1L, "Harry Potter", "JK Rowlings", 1);

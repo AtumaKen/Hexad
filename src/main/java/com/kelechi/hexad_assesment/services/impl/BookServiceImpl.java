@@ -48,7 +48,8 @@ public class BookServiceImpl implements BookService {
         Book toBeBorrowed = findById(book.getId());
         if(toBeBorrowed.getAvailableCopies() > 0) {
             toBeBorrowed.setAvailableCopies(toBeBorrowed.getAvailableCopies() - 1);
-
+            if(toBeBorrowed.getAvailableCopies() == 0)
+                removeBook(toBeBorrowed);
             return toBeBorrowed;
         }
         removeBook(toBeBorrowed);
