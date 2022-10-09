@@ -1,6 +1,7 @@
 package com.kelechi.hexad_assesment.services;
 
 import com.kelechi.hexad_assesment.HeadAssessmentApplication;
+import com.kelechi.hexad_assesment.exceptions.ProcessingException;
 import com.kelechi.hexad_assesment.models.Book;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -47,8 +48,14 @@ class BorrowBookServiceTest {
     }
 
     @Test
-    void userHasABorrowingLimitOfTwoBooks{
-
+    void userHasABorrowingLimitOfTwoBooks (){
+        Book book1 = new Book(28L, "Harry Potter", "JK Rowlings");
+        Book book2  = new Book(98L, "Animal Farm", "George Owel");
+        bookService.addBook(book1);
+        bookService.addBook(book2);
+        service.borrow(98L);
+        service.borrow(28L);
+        assertThrows( ProcessingException.class, () -> service.borrow(1L));
     }
 
 }
