@@ -9,4 +9,7 @@ public interface BookService {
     List<Book> getAll();
 
     void addBook(Book book);
+
+    boolean compareBooks();
+
 }

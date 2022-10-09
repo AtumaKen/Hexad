@@ -22,5 +22,10 @@ public class BookServiceImpl implements BookService {
         books.add(book);
     }
 
+    @Override
+    public boolean compareBooks() {
+        return false;
+    }
+
 
 }
