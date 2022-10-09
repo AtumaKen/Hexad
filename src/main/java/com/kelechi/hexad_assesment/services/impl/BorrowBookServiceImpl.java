@@ -1,5 +1,6 @@
 package com.kelechi.hexad_assesment.services.impl;
 
+import com.kelechi.hexad_assesment.exceptions.ProcessingException;
 import com.kelechi.hexad_assesment.models.Book;
 import com.kelechi.hexad_assesment.services.BookService;
 import com.kelechi.hexad_assesment.services.BorrowBookService;
@@ -19,6 +20,9 @@ public class BorrowBookServiceImpl implements BorrowBookService {
 
     @Override
     public List<Book> borrow(Long id) {
+        System.out.println("borrowed list " + borrowedBooks.size());
+        if(borrowedBooks.size() > 1 )
+            throw new ProcessingException("Borrow Limit exceeded");
         Book bookToBeBorrowed = bookService.findById(id);
         bookService.removeBook(bookToBeBorrowed);
         borrowedBooks.add(bookToBeBorrowed);

@@ -55,7 +55,7 @@ class BorrowBookServiceTest {
         bookService.addBook(book2);
         service.borrow(98L);
         service.borrow(28L);
-        assertThrows( ProcessingException.class, () -> service.borrow(1L));
+        assertThrows( ProcessingException.class, () -> service.borrow(1L), "User has a borrowing limit of 2");
     }
 
 }
