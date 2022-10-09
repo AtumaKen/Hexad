@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class BookServiceTest {
 
     @Test
-    void findAll(){
+    void findAllBooks(){
 
         Book book1 = new Book(1L, "Harry Potter", "JK Rowlings");
         Book book2  = new Book(2L, "Animal Farm", "George Owel");
@@ -22,7 +22,7 @@ public class BookServiceTest {
         service.addBook(book2);
         List<Book> allBooks = service.findAll();
 
-        Book lastBook = allBooks.get(allBooks.size() -2);
+        Book lastBook = allBooks.get(allBooks.size() - 1);
         assertEquals(book2.getId(), lastBook.getId());
         assertEquals(book2.getTitle(), lastBook.getTitle());
         assertEquals(book2.getAuthor(), lastBook.getAuthor());
