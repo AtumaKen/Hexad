@@ -10,6 +10,7 @@ Library backend application built with Java/Spring boot.
 3. Clone project from private [git repo](https://github.com/AtumaKen/Hexad.git) and checkout master branch
 4. Open project in any java enabled IDE of you choice. Strongly recommend [Intellij IDEA](https://www.jetbrains.com/idea/download/).
 5. If you experience dependency issues, run `mvn dependency:resolve`
+6. Run `mvn compile` to compile and be sure everything is in order
 
 
 
