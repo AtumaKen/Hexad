@@ -40,7 +40,7 @@ public class BorrowBookServiceImpl implements BorrowBookService {
     @Override
     public Book findById(long bookId) {
         return borrowedBooks.stream().filter(book -> book.getId().equals(bookId)).findAny()
-                .orElseThrow( () ->new ProcessingException("Book not in borrowed List found"));
+                .orElseThrow( () ->new ProcessingException("Book not in borrowed List"));
     }
 
     @Override
