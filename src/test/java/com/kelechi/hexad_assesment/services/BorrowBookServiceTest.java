@@ -74,7 +74,7 @@ class BorrowBookServiceTest {
     }
 
     @Test
-    void userCanOnlyHaveOneCopyOfABook(){
+    void userCanOnlyBorrowOneCopyOfABook(){
         bookService.addBook(new Book(28L, "Harry Potter", "JK Rowlings", 2));
         List<Book> allBooks = bookService.getAll();
         borrowBookService.borrow(28L);

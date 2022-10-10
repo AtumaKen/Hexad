@@ -66,8 +66,4 @@ public class BookServiceTest {
         assertFalse(borrowedBooks.stream().anyMatch(borrowed -> bookService.compareBooks(borrowed, book1)));
     }
 
-
-
-
-
 }
