@@ -1,6 +1,7 @@
 package com.kelechi.hexad_assesment.services;
 
 import com.kelechi.hexad_assesment.HeadAssessmentApplication;
+import com.kelechi.hexad_assesment.exceptions.ProcessingException;
 import com.kelechi.hexad_assesment.models.Book;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -64,6 +65,13 @@ public class BookServiceTest {
         List<Book> borrowedBooks = borrowBookService.getBorrowedBooks();
         assertTrue(availableBooks.stream().anyMatch(available -> bookService.compareBooks(available, book1)));
         assertFalse(borrowedBooks.stream().anyMatch(borrowed -> bookService.compareBooks(borrowed, book1)));
+    }
+
+    @Test
+    void userCanNotReturnABookWhenBorrowedListIsEmpty(){
+        Book book2  = new Book(2L, "Animal Farm", "George Owel", 1);
+        bookService.addBook(book2);
+        assertThrows(ProcessingException.class, () -> borrowBookService.borrow(2L));
     }
 
 }
