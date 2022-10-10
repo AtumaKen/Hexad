@@ -22,7 +22,7 @@ public class BookController {
         return service.getAll();
     }
 
-    @PostMapping
+    @PostMapping("/return")
     @ResponseStatus(HttpStatus.OK)
     public Book returnBorrowedBook(@RequestBody Book book){
         return service.returnBook(book);
