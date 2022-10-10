@@ -71,7 +71,7 @@ public class BookServiceTest {
     void userCanNotReturnABookWhenBorrowedListIsEmpty(){
         Book book2  = new Book(2L, "Animal Farm", "George Owel", 1);
         bookService.addBook(book2);
-        assertThrows(ProcessingException.class, () -> borrowBookService.borrow(2L));
+        assertThrows(ProcessingException.class, () -> bookService.returnBook(book2));
     }
 
 }
