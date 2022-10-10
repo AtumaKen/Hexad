@@ -74,4 +74,13 @@ public class BookServiceTest {
         assertThrows(ProcessingException.class, () -> bookService.returnBook(book2));
     }
 
+    @Test
+    void increamentAvailableCopiesWhenBookIsReturned(){
+        Book book2  = new Book(2L, "Animal Farm", "George Owel", 1);
+        bookService.addBook(book2);
+        borrowBookService.borrow(2L);
+        bookService.returnBook(book2);
+        assertEquals(1, bookService.findById(2L).getAvailableCopies());
+    }
+
 }
