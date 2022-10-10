@@ -71,7 +71,7 @@ public class BookServiceImpl implements BookService {
         //todo: check for empty borrowed book list
         Book borrowed = borrowedBooks.stream().filter(book1 -> compareBooks(book1, book)).findAny()
                 .orElseThrow(() -> new ProcessingException("Book not in borrowed list"));
-
+        borrowBookService.remove(borrowed);
         Optional<Book> any = books.stream().filter(book1 -> compareBooks(book1, borrowed)).findAny();
         if (any.isPresent()) {
             Book returnedBook = any.get();

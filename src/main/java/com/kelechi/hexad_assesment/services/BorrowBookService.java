@@ -11,4 +11,6 @@ public interface BorrowBookService {
     List<Book> getBorrowedBooks();
 
     Book findById(long bookId);
+
+    void remove(Book borrowed);
 }

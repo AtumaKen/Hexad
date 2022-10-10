@@ -63,7 +63,7 @@ public class BookServiceTest {
         List<Book> availableBooks = bookService.getAll();
         List<Book> borrowedBooks = borrowBookService.getBorrowedBooks();
         assertTrue(availableBooks.stream().anyMatch(available -> bookService.compareBooks(available, book1)));
-        assertFalse(borrowedBooks.stream().anyMatch(borrwed -> bookService.compareBooks(borrwed, book1)));
+        assertFalse(borrowedBooks.stream().anyMatch(borrowed -> bookService.compareBooks(borrowed, book1)));
     }
 
 

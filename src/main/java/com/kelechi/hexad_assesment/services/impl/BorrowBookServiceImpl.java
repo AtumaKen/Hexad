@@ -42,4 +42,9 @@ public class BorrowBookServiceImpl implements BorrowBookService {
         return borrowedBooks.stream().filter(book -> book.getId().equals(bookId)).findAny()
                 .orElseThrow( () ->new ProcessingException("Book not in borrowed List found"));
     }
+
+    @Override
+    public void remove(Book borrowed) {
+        borrowedBooks.remove(borrowed);
+    }
 }
