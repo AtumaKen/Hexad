@@ -55,6 +55,9 @@ public class BookServiceImpl implements BookService {
     @Override
     public Book borrowBook(Book book) {
         Book toBeBorrowed = findById(book.getId());
+
+        if(borrowBookService.getBorrowedBooks().stream().anyMatch(book1 -> compareBooks(book1, book)))
+            throw new ProcessingException("You can only have one copy of this book");
         if (toBeBorrowed.getAvailableCopies() > 0) {
             toBeBorrowed.setAvailableCopies(toBeBorrowed.getAvailableCopies() - 1);
             if (toBeBorrowed.getAvailableCopies() == 0)
