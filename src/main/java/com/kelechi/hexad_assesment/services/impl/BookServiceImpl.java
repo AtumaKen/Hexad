@@ -79,7 +79,10 @@ public class BookServiceImpl implements BookService {
         if (any.isPresent()) {
             Book returnedBook = any.get();
             returnedBook.setAvailableCopies(returnedBook.getAvailableCopies() + 1);
-        } else books.add(book);
+        } else {
+            book.setAvailableCopies(book.getAvailableCopies() + 1);
+            books.add(book);
+        };
         return book;
     }
 
