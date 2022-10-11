@@ -4,7 +4,6 @@ Hexad technical assessment
 Library backend application built with Java/Spring boot.
 
 **How to set up Project**
-* Extract Hexad.zip from email attachment
 
 1. Ensure [JDK 11](https://www.oracle.com/java/technologies/javase/jdk11-archive-downloads.html) is installed on your machine
 2. Ensure [maven](https://maven.apache.org/install.html) is installed on your machine
